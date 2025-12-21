@@ -21,7 +21,7 @@ interface ServicesSectionProps {
 }
 
 const ServicesSection: React.FC<ServicesSectionProps> = ({
-  serviceRefs = [],
+  serviceRefs,
   serviceTranslates = [],
 }) => {
   const [expandedService, setExpandedService] = useState<number | null>(1); // BRANDING expanded by default
@@ -109,7 +109,7 @@ const ServicesSection: React.FC<ServicesSectionProps> = ({
             <div
               key={service.id}
               ref={(el) => {
-                if (serviceRefs?.current) {
+                if (serviceRefs && "current" in serviceRefs) {
                   serviceRefs.current[index] = el;
                 }
               }}
