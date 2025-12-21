@@ -1,6 +1,6 @@
 import React from "react";
 
-const Node = ({ width = "80", height = "80" }) => {
+const Node = ({ width = "50", height = "50" }) => {
   return (
     <svg
       width={width}

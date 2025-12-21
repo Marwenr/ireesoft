@@ -1,9 +1,9 @@
 import React from "react";
 
-const Android = ({ width = "80", height = "80" }) => {
+const Android = ({ width = "50", height = "50" }) => {
   return (
     <svg
-      fill="#000000"
+      fill="#7e7e7e"
       version="1.1"
       viewBox="0 0 512 512"
       enable-background="new 0 0 512 512"

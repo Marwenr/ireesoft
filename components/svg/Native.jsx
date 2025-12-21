@@ -1,6 +1,6 @@
 import React from "react";
 
-const Native = ({ width = "80", height = "80" }) => {
+const Native = ({ width = "50", height = "50" }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 32 32" fill="#000000">
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

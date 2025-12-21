@@ -1,6 +1,6 @@
 import React from "react";
 
-const Ios = ({ width = "80", height = "80" }) => {
+const Ios = ({ width = "50", height = "50" }) => {
   return (
     <svg viewBox="0 0 32 32" fill="none" width={width} height={height}>
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -12,7 +12,7 @@ const Ios = ({ width = "80", height = "80" }) => {
       <g id="SVGRepo_iconCarrier">
         <path
           d="M30 16C30 23.728 23.735 30 16 30C8.265 30 2 23.728 2 16C2 8.265 8.265 2 16 2C23.735 2 30 8.265 30 16Z"
-          fill="#283544"
+          fill="#7e7e7e"
         ></path>
         <path
           d="M7.08597 20.8394H8.61506V13.7443H7.08597V20.8394ZM7.84745 12.8139C8.3203 12.8139 8.70103 12.4123 8.70103 11.9103C8.70103 11.3949 8.3203 11 7.84745 11C7.38074 11 7 11.3949 7 11.9103C7 12.4123 7.38074 12.8139 7.84745 12.8139Z"

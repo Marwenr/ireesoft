@@ -1,6 +1,6 @@
 import React from "react";
 
-const Mongo = ({ width = "80", height = "80" }) => {
+const Mongo = ({ width = "50", height = "50" }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 1024 1024" fill="#000000">
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

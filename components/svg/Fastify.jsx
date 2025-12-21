@@ -1,6 +1,6 @@
 import React from "react";
 
-const Fastify = ({ width = "80", height = "80" }) => {
+const Fastify = ({ width = "50", height = "50" }) => {
   return (
     <svg
       width={width}

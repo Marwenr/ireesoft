@@ -1,6 +1,6 @@
 import React from "react";
 
-const ReactJs = ({ width = "80", height = "80" }) => {
+const ReactJs = ({ width = "50", height = "50" }) => {
   return (
     <svg viewBox="0 0 32 32" fill="none" width={width} height={height}>
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

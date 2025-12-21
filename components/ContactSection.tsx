@@ -92,22 +92,14 @@ const ContactSection: React.FC = () => {
   return (
     <div 
       className="w-full max-w-full box-border flex flex-col py-8 md:py-12 lg:py-16 relative"
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='120' height='120' fill='%23FFFFFF'/%3E%3Crect width='120' height='120' fill='none' stroke='%23E5E5E5' stroke-width='0.5'/%3E%3C/svg%3E")`,
-        backgroundColor: '#FAFAFA'
-      }}
     >
-      {/* Random squares from existing pattern with different background - left, aligned to 120px grid */}
-      <div className="absolute top-0 bg-[#f8f8f8] border border-background-gray" style={{ left: '120px', width: '120px', height: '120px' }}></div>
-      <div className="absolute top-0 bg-[#f8f8f8] border border-background-gray" style={{ left: '480px', width: '120px', height: '120px' }}></div>
-      
       <div className="w-full max-w-full box-border flex flex-col items-center relative z-10">
         {/* Header Section */}
         <div className="mb-8 md:mb-12 text-center">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-text-primary mb-4 md:mb-6">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 md:mb-6">
             Contactez notre équipe
           </h2>
-          <p className="text-text-secondary text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
+          <p className="text-gray-200 text-base md:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed">
             Vous avez des questions sur nos produits ou nos services ? Nous sommes là pour vous aider.
             <br />
             Discutez avec notre équipe amicale et obtenez une consultation gratuite en moins de 5 minutes.
@@ -157,7 +149,7 @@ const ContactSection: React.FC = () => {
 
               {/* Phone Number */}
               <div className="w-full">
-                <label className="block text-sm font-medium text-text-primary mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Téléphone
                 </label>
                 <div className="flex">
@@ -180,7 +172,7 @@ const ContactSection: React.FC = () => {
 
               {/* Message */}
               <div className="w-full">
-                <label className="block text-sm font-medium text-text-primary mb-2">
+                <label className="block text-sm font-medium text-white mb-2">
                   Message *
                 </label>
                 <textarea
@@ -206,7 +198,7 @@ const ContactSection: React.FC = () => {
 
               {/* Services Checkboxes */}
               <div className="w-full">
-                <label className="block text-sm font-medium text-text-primary mb-3">
+                <label className="block text-sm font-medium text-white mb-3">
                   Services
                 </label>
                 <div className="grid grid-cols-2 gap-3 md:gap-4">
@@ -219,9 +211,9 @@ const ContactSection: React.FC = () => {
                         type="checkbox"
                         checked={formData.services.includes(service)}
                         onChange={() => handleServiceChange(service)}
-                        className="w-4 h-4 rounded border-background-gray text-primary-dark focus:ring-2 focus:ring-primary-dark cursor-pointer"
+                        className="w-4 h-4 rounded border-gray-400 text-primary-dark focus:ring-2 focus:ring-primary-dark cursor-pointer"
                       />
-                      <span className="text-sm md:text-base text-text-primary group-hover:text-primary-dark transition-colors">
+                      <span className="text-sm md:text-base text-white group-hover:text-gray-200 transition-colors">
                         {service}
                       </span>
                     </label>
@@ -245,16 +237,16 @@ const ContactSection: React.FC = () => {
           <div className="w-full lg:flex-1 flex flex-col gap-8 md:gap-10 bg-transparent p-6 md:p-8 rounded-lg">
             {/* Chat with us */}
             <div>
-              <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-2">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                 Discutez avec nous
               </h3>
-              <p className="text-text-secondary text-sm md:text-base mb-4">
+              <p className="text-gray-200 text-sm md:text-base mb-4">
                 Parlez à notre équipe amicale via chat en direct.
               </p>
               <div className="space-y-3">
                 <a
                   href="#"
-                  className="flex items-center gap-3 text-text-primary hover:text-primary-dark transition-colors group"
+                  className="flex items-center gap-3 text-white hover:text-gray-200 transition-colors group"
                 >
                   <svg
                     className="w-5 h-5"
@@ -275,7 +267,7 @@ const ContactSection: React.FC = () => {
                 </a>
                 <a
                   href="#"
-                  className="flex items-center gap-3 text-text-primary hover:text-primary-dark transition-colors group"
+                  className="flex items-center gap-3 text-white hover:text-gray-200 transition-colors group"
                 >
                   <svg
                     className="w-5 h-5"
@@ -296,7 +288,7 @@ const ContactSection: React.FC = () => {
                 </a>
                 <a
                   href="#"
-                  className="flex items-center gap-3 text-text-primary hover:text-primary-dark transition-colors group"
+                  className="flex items-center gap-3 text-white hover:text-gray-200 transition-colors group"
                 >
                   <svg
                     className="w-5 h-5"
@@ -314,15 +306,15 @@ const ContactSection: React.FC = () => {
 
             {/* Call us */}
             <div>
-              <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-2">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                 Appelez-nous
               </h3>
-              <p className="text-text-secondary text-sm md:text-base mb-4">
+              <p className="text-gray-200 text-sm md:text-base mb-4">
                 Appelez notre équipe du lundi au vendredi de 8h à 17h.
               </p>
               <a
                 href="tel:+33123456789"
-                className="flex items-center gap-3 text-text-primary hover:text-primary-dark transition-colors group"
+                className="flex items-center gap-3 text-white hover:text-gray-200 transition-colors group"
               >
                 <svg
                   className="w-5 h-5"
@@ -345,15 +337,15 @@ const ContactSection: React.FC = () => {
 
             {/* Visit us */}
             <div>
-              <h3 className="text-xl md:text-2xl font-bold text-text-primary mb-2">
+              <h3 className="text-xl md:text-2xl font-bold text-white mb-2">
                 Visitez-nous
               </h3>
-              <p className="text-text-secondary text-sm md:text-base mb-4">
+              <p className="text-gray-200 text-sm md:text-base mb-4">
                 Discutez avec nous en personne à notre siège.
               </p>
               <a
                 href="#"
-                className="flex items-start gap-3 text-text-primary hover:text-primary-dark transition-colors group"
+                className="flex items-start gap-3 text-white hover:text-gray-200 transition-colors group"
               >
                 <svg
                   className="w-5 h-5 mt-0.5 flex-shrink-0"

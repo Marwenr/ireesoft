@@ -23,15 +23,29 @@
 }
 
 @keyframes scroll-left {
-  0% {
+  from {
     transform: translateX(0);
   }
-  100% {
+  to {
     transform: translateX(-50%);
   }
 }
 
-.animate-scroll-left {
-  animation: scroll-left 20s linear infinite;
+@keyframes scroll-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
+.animate-scroll-left {
+  animation: scroll-left 70s linear infinite;
+  will-change: transform;
+}
+
+.animate-scroll-right {
+  animation: scroll-right 70s linear infinite;
+  will-change: transform;
+}

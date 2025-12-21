@@ -1,6 +1,6 @@
 import React from "react";
 
-const Express = ({ width = "80", height = "80" }) => {
+const Express = ({ width = "50", height = "50" }) => {
   return (
     <svg
       width={width}

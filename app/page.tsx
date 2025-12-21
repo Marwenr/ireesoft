@@ -1,69 +1,809 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+import Spline from "@splinetool/react-spline";
 import Sidebar from "@/components/Sidebar";
-import HeroSection from "@/components/HeroSection";
-import RightSection from "@/components/RightSection";
-import FeaturesSection from "@/components/FeaturesSection";
 import ServicesSection from "@/components/ServicesSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
+import Button from "@/components/Button";
+import {
+  ReactJs,
+  Next,
+  Node,
+  Express,
+  Mongo,
+  Tailwind,
+  Docker,
+  Expo,
+  Android,
+  Ios,
+  Vercel,
+  Ovh,
+} from "../components/svg";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [translateX, setTranslateX] = useState(0);
+  const [sidebarWidth, setSidebarWidth] = useState(64);
+  const [aboutLeftTranslate, setAboutLeftTranslate] = useState(400);
+  const [aboutRightTranslate, setAboutRightTranslate] = useState(-400);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const heroSectionRef = useRef<HTMLDivElement>(null);
+  const aboutSectionRef = useRef<HTMLDivElement>(null);
+  const featureRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const serviceRefs = useRef<(HTMLDivElement | null)[]>(Array(4).fill(null));
+  const [serviceTranslates, setServiceTranslates] = useState<number[]>([
+    250, 500, 750, 1000,
+  ]);
+  const servicesSectionRef = useRef<HTMLDivElement>(null);
+  const [featureTransforms, setFeatureTransforms] = useState<
+    Array<{
+      translateY: number;
+      scale: number;
+      rotateX: number;
+    }>
+  >(
+    Array(5)
+      .fill(null)
+      .map(() => ({
+        translateY: 20,
+        scale: 0.75,
+        rotateX: -12,
+      }))
+  );
+
+  const technologyLogos = [
+    { id: 1, component: ReactJs, title: "React js" },
+    { id: 2, component: Next, title: "Next js" },
+    { id: 3, component: Node, title: "Node js" },
+    { id: 4, component: Mongo, title: "Mongo db" },
+    { id: 5, component: Tailwind, title: "Tailwind css" },
+    { id: 6, component: Docker, title: "Docker" },
+    { id: 7, component: Expo, title: "Expo" },
+    { id: 8, component: Android, title: "Android" },
+    { id: 9, component: Ios, title: "IOS" },
+    { id: 10, component: Vercel, title: "Vercel" },
+    { id: 11, component: Ovh, title: "OVH Cloud" },
+    { id: 12, component: ReactJs, title: "React js" },
+    { id: 13, component: Next, title: "Next js" },
+    { id: 14, component: Node, title: "Node js" },
+    { id: 15, component: Mongo, title: "Mongo db" },
+    { id: 16, component: Tailwind, title: "Tailwind css" },
+    { id: 17, component: Docker, title: "Docker" },
+    { id: 18, component: Expo, title: "Expo" },
+    { id: 19, component: Android, title: "Android" },
+    { id: 20, component: Ios, title: "IOS" },
+    { id: 21, component: Vercel, title: "Vercel" },
+    { id: 22, component: Ovh, title: "OVH Cloud" },
+  ];
+
+  interface Feature {
+    id: number;
+    emoji: string;
+    title: string;
+    img: string;
+    description: string;
+  }
+
+  const features: Feature[] = [
+    {
+      id: 1,
+      emoji: "💰",
+      title: "Budget maîtrisé, valeur maximale",
+      img: "choose1.svg",
+      description:
+        "Nous proposons des solutions digitales de haute qualité avec une optimisation intelligente des coûts, sans compromis sur la performance ni le design.",
+    },
+    {
+      id: 2,
+      emoji: "👥",
+      title: "Équipe experte et engagée",
+      img: "choose2.svg",
+      description:
+        "Vous collaborez avec une équipe dédiée, expérimentée et impliquée, qui comprend vos enjeux et travaille avec réactivité et transparence.",
+    },
+    {
+      id: 3,
+      emoji: "⏱️",
+      title: "Livraison fiable et respect des délais",
+      img: "choose3.svg",
+      description:
+        "Grâce à une méthodologie claire et agile, nous garantissons des livraisons structurées, dans les temps, avec une visibilité continue sur l'avancement.",
+    },
+    {
+      id: 4,
+      emoji: "🤝",
+      title: "Accompagnement de A à Z",
+      img: "choose4.svg",
+      description:
+        "De la planification au déploiement final, nous vous accompagnons à chaque étape avec une communication claire et un suivi constant.",
+    },
+    {
+      id: 5,
+      emoji: "💡",
+      title: "Consultation gratuite dès l'idée",
+      img: "choose5.svg",
+      description:
+        "Vous avez une idée mais ne savez pas si elle est réalisable ou quel budget prévoir ? Nous vous offrons une consultation gratuite pour analyser votre projet et vous orienter vers la meilleure solution.",
+    },
+  ];
+  useEffect(() => {
+    const updateSidebarWidth = () => {
+      if (sidebarOpen) {
+        setSidebarWidth(256); // w-64
+      } else {
+        // Check if md breakpoint (768px)
+        if (window.innerWidth >= 768) {
+          setSidebarWidth(80); // md:w-20
+        } else {
+          setSidebarWidth(64); // w-16
+        }
+      }
+    };
+
+    updateSidebarWidth();
+    window.addEventListener("resize", updateSidebarWidth);
+
+    return () => {
+      window.removeEventListener("resize", updateSidebarWidth);
+    };
+  }, [sidebarOpen]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!scrollContainerRef.current || !heroSectionRef.current) return;
+
+      const container = scrollContainerRef.current;
+      const heroSection = heroSectionRef.current;
+      const scrollTop = window.scrollY;
+      const containerTop = container.offsetTop;
+      const containerHeight = container.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      const scrollableHeight = containerHeight - viewportHeight;
+
+      // Check if we're within the scroll container
+      if (
+        scrollTop >= containerTop &&
+        scrollTop <= containerTop + scrollableHeight
+      ) {
+        // Calculate scroll progress within the container (0 to 1)
+        const scrollProgress = (scrollTop - containerTop) / scrollableHeight;
+
+        // Calculate translateX: 0 at start (scroll down), -100% at end (fully left)
+        // Scroll down = translate left (negative)
+        const heroWidth = heroSection.offsetWidth;
+        const maxTranslate = -heroWidth;
+        const newTranslateX = scrollProgress * maxTranslate;
+
+        setTranslateX(newTranslateX);
+      } else if (scrollTop < containerTop) {
+        // Before container, reset to 0 (translate right)
+        setTranslateX(0);
+      } else {
+        // After container, keep at max translate (fully left)
+        const heroWidth = heroSection.offsetWidth;
+        setTranslateX(-heroWidth);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll(); // Initial call
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [sidebarOpen, sidebarWidth]);
+
+  // About section scroll animation - slides in from outside
+  useEffect(() => {
+    const handleAboutScroll = () => {
+      if (!aboutSectionRef.current) return;
+
+      const aboutSection = aboutSectionRef.current;
+      const sectionRect = aboutSection.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Animation starts when section top is at viewport bottom (sectionRect.top = viewportHeight)
+      // Animation ends when section top is at viewport center (sectionRect.top = viewportHeight * 0.5)
+      const animationStart = viewportHeight;
+      const animationEnd = viewportHeight * 0.3;
+
+      // sectionRect.top is the distance from viewport top to section top
+      // When section is below viewport: sectionRect.top > viewportHeight
+      // When section enters viewport: sectionRect.top < viewportHeight
+      const sectionTop = sectionRect.top;
+
+      // Animation: slide content in from outside as section enters viewport
+      if (sectionTop <= animationStart && sectionTop >= animationEnd) {
+        // Calculate progress (0 to 1)
+        // When sectionTop = animationStart (viewportHeight), progress = 0 (start)
+        // When sectionTop = animationEnd (viewportHeight * 0.3), progress = 1 (end)
+        const scrollProgress =
+          (animationStart - sectionTop) / (animationStart - animationEnd);
+        const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+
+        // Use easing function for smoother animation
+        const easeOutCubic = 1 - Math.pow(1 - clampedProgress, 3);
+
+        // Text section (left): starts at -400 (off-screen left), translates to 0 (its position)
+        const textSectionStart = -400;
+        const textSectionTranslate =
+          textSectionStart + easeOutCubic * Math.abs(textSectionStart);
+
+        // Statistics section (right): starts at 400 (off-screen right), translates to 0 (its position)
+        const statsSectionStart = 400;
+        const statsSectionTranslate =
+          statsSectionStart - easeOutCubic * statsSectionStart;
+
+        setAboutRightTranslate(textSectionTranslate); // Text section (left side)
+        setAboutLeftTranslate(statsSectionTranslate); // Stats section (right side)
+      } else if (sectionTop > animationStart) {
+        // Before section enters viewport, keep off-screen positions
+        setAboutRightTranslate(-400); // Text section off-screen left
+        setAboutLeftTranslate(400); // Stats section off-screen right
+      } else {
+        // After animation end, content is in place (at 0)
+        setAboutRightTranslate(0);
+        setAboutLeftTranslate(0);
+      }
+    };
+
+    window.addEventListener("scroll", handleAboutScroll, { passive: true });
+    handleAboutScroll(); // Initial call
+
+    return () => {
+      window.removeEventListener("scroll", handleAboutScroll);
+    };
+  }, []);
+
+  // Feature scroll animation
+  useEffect(() => {
+    const handleFeatureScroll = () => {
+      const viewportHeight = window.innerHeight;
+      const scrollTop = window.scrollY;
+
+      // Animation states: 8 smooth states for fluid animation
+      const animationStates = [
+        { translateY: 20, scale: 0.75, rotateX: -12 },
+        { translateY: 17.756, scale: 0.77805, rotateX: -10.6536 },
+        { translateY: 15.7628, scale: 0.802965, rotateX: -9.45768 },
+        { translateY: 13.4632, scale: 0.83171, rotateX: -8.07792 },
+        { translateY: 8.1684, scale: 0.897895, rotateX: -4.90104 },
+        { translateY: 6.336, scale: 0.9208, rotateX: -3.8016 },
+        { translateY: 3.526, scale: 0.955925, rotateX: -2.1156 },
+        { translateY: 0, scale: 1, rotateX: 0 },
+      ];
+
+      featureRefs.current.forEach((ref, index) => {
+        if (!ref) return;
+
+        const rect = ref.getBoundingClientRect();
+        const elementTop = rect.top;
+        const elementCenter = elementTop + rect.height / 2;
+        const viewportCenter = viewportHeight / 2;
+
+        // Calculate distance from viewport center (positive = below center, negative = above center)
+        const distanceFromCenter = elementCenter - viewportCenter;
+
+        // Normalize: when element is 1 viewport height above center, progress = 0 (initial state)
+        // when element is at center, progress = 1 (final state)
+        // Animation range: from -viewportHeight to 0
+        const animationRange = viewportHeight;
+        let progress = 1 - distanceFromCenter / animationRange;
+
+        // Clamp progress between 0 and 1
+        progress = Math.max(0, Math.min(1, progress));
+
+        // Map progress (0-1) to animation states (0-7)
+        const stateProgress = progress * 7;
+        let stateIndex = Math.floor(stateProgress);
+        stateIndex = Math.min(stateIndex, 6); // Max index is 6 (for interpolation between 6 and 7)
+
+        const localProgress = stateProgress - stateIndex;
+
+        const state1 = animationStates[stateIndex];
+        const state2 = animationStates[stateIndex + 1];
+
+        const translateY =
+          state1.translateY +
+          (state2.translateY - state1.translateY) * localProgress;
+        const scale =
+          state1.scale + (state2.scale - state1.scale) * localProgress;
+        const rotateX =
+          state1.rotateX + (state2.rotateX - state1.rotateX) * localProgress;
+
+        setFeatureTransforms((prev) => {
+          const newTransforms = [...prev];
+          newTransforms[index] = { translateY, scale, rotateX };
+          return newTransforms;
+        });
+      });
+    };
+
+    window.addEventListener("scroll", handleFeatureScroll, { passive: true });
+    handleFeatureScroll(); // Initial call
+
+    return () => {
+      window.removeEventListener("scroll", handleFeatureScroll);
+    };
+  }, []);
+
+  // Services scroll animation - slides in from bottom (1000px), one after another
+  useEffect(() => {
+    const handleServiceScroll = () => {
+      if (!servicesSectionRef.current) return;
+
+      const servicesSection = servicesSectionRef.current;
+      const viewportHeight = window.innerHeight;
+      const sectionRect = servicesSection.getBoundingClientRect();
+      const sectionTop = sectionRect.top;
+
+      // Animation starts when section top is at viewport bottom
+      // Animation ends when section top is at viewport center
+      const animationStart = viewportHeight;
+      const animationEnd = viewportHeight * 0.3;
+
+      // Animation: slide services in from bottom (1000px) as section enters viewport
+      if (sectionTop <= animationStart && sectionTop >= animationEnd) {
+        // Calculate progress (0 to 1)
+        const scrollProgress =
+          (animationStart - sectionTop) / (animationStart - animationEnd);
+        const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+
+        // Use easing function for smoother animation
+        const easeOutCubic = 1 - Math.pow(1 - clampedProgress, 3);
+
+        // Each service animates with a delay based on index (staggered)
+        serviceRefs.current.forEach((ref, index) => {
+          if (!ref) return;
+
+          const delay = index * 0.2; // 20% delay between each service
+          const delayedProgress = Math.max(
+            0,
+            Math.min(1, (clampedProgress - delay) / (1 - delay))
+          );
+
+          // Use easing for delayed progress
+          const easeOutCubicDelayed = 1 - Math.pow(1 - delayedProgress, 3);
+
+          // Service starts at 1000px (below position), translates to 0 (its position)
+          const serviceStart = 1000;
+          const serviceTranslate =
+            serviceStart - easeOutCubicDelayed * serviceStart;
+
+          setServiceTranslates((prev) => {
+            const newTranslates = [...prev];
+            newTranslates[index] = serviceTranslate;
+            return newTranslates;
+          });
+        });
+      } else if (sectionTop > animationStart) {
+        // Before section enters viewport, keep off-screen positions (1000px)
+        setServiceTranslates([250, 500, 750, 1000]);
+      } else {
+        // After animation end, content is in place (at 0)
+        setServiceTranslates([0, 0, 0, 0]);
+      }
+    };
+
+    window.addEventListener("scroll", handleServiceScroll, { passive: true });
+    handleServiceScroll(); // Initial call
+
+    return () => {
+      window.removeEventListener("scroll", handleServiceScroll);
+    };
+  }, []);
 
   return (
-    <main className="min-h-screen bg-background-white overflow-x-hidden">
+    <main className="min-h-screen">
       <Sidebar onToggle={setSidebarOpen} />
       <div
-        className={`w-[calc(100%-64px)] md:w-[calc(100%-80px)] ${
-          sidebarOpen ? "ml-64" : "ml-16 md:ml-20"
-        }`}
+        className={`w-[calc(100vw-64px)] md:w-[calc(100vw-95px)] ml-16 md:ml-20`}
       >
         <div
-          className={`grid grid-cols-1 lg:grid-cols-2 relative transition-all duration-300 ease-in-out`}
+          ref={scrollContainerRef}
+          className={`grid grid-cols-1 lg:grid-cols-2 relative overflow-hidden`}
+          style={{
+            height: "300vh",
+          }}
         >
-          {/* Left Section - Hero */}
-          <div className="bg-background-white relative z-10 overflow-visible">
-            <HeroSection />
+          <div
+            className="grayscale-[70%]"
+            style={{
+              position: "fixed",
+              top: 0,
+              left: 0,
+              width: "100vw",
+              height: "100vh",
+              zIndex: 0,
+            }}
+          >
+            <Spline scene="https://prod.spline.design/km-t8b4Ued3ER54i/scene.splinecode" />
+          </div>
+          {/* Left Section - Hero - Fixed during scroll */}
+          <div
+            ref={heroSectionRef}
+            className="bg-background-white relative z-10 overflow-visible"
+            style={{
+              position: "fixed",
+              top: 0,
+              left: `${sidebarWidth}px`,
+              width: `calc((100vw - ${sidebarWidth}px) / 2)`,
+              height: "100vh",
+              transform: `translateX(${translateX}px)`,
+              transition:
+                "transform 0.1s ease-out, left 0.3s ease-in-out, width 0.3s ease-in-out",
+            }}
+          >
+            <div
+              className="flex flex-col justify-between h-screen py-8 md:py-16 px-4 md:px-20"
+              style={{
+                position: "fixed",
+                top: 0,
+                width: `calc((100vw - ${sidebarWidth}px) / 2)`,
+                height: "100vh",
+                transform: `translateX(${translateX}px)`,
+                transition:
+                  "transform 0.2s ease-out, left 0.4s ease-in-out, width 0.4s ease-in-out",
+              }}
+            >
+              {/* Main Content */}
+              <div className="flex-1 flex flex-col justify-center">
+                {/* Headline */}
+                <div className="mb-8">
+                  <div className="flex items-start space-x-3 mb-0">
+                    <span className="text-accent-red text-xl md:text-2xl font-bold">
+                      *
+                    </span>
+                    <p className="text-text-secondary text-base md:text-4xl font-bold">
+                      Software Development & Digital Solutions
+                    </p>
+                  </div>
+                  <h1 className="text-5xl md:text-6xl lg:text-[10rem] xl:text-[13rem] font-bold text-text-primary leading-none relative z-20 mt-0">
+                    IREESOFT
+                  </h1>
+                </div>
+
+                {/* Sub-headline */}
+                <p className="text-text-secondary text-base md:text-lg max-w-2xl mb-16">
+                  From Idea to Implementation — We create custom software,
+                  websites, and mobile apps
+                </p>
+
+                {/* Button - Visible only on sm/md */}
+                <div className="lg:hidden w-full text-center">
+                  <button className="lg:hidden bg-primary-dark rounded-2xl px-6 md:px-8 py-4 md:py-6 shadow-xl self-start">
+                    <p className="text-background-white text-base md:text-lg font-semibold">
+                      Free consultation
+                    </p>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Right Section - Abstract Background */}
-          <div className="hidden lg:block bg-background-light relative overflow-hidden">
-            <RightSection />
+          {/* Right Section - Abstract Background - Fixed during scroll */}
+          <div
+            className="hidden lg:block relative overflow-hidden"
+            style={{
+              position: "fixed",
+              top: 0,
+              right: 0,
+              width: "50%",
+              height: "100vh",
+            }}
+          >
+            <div className="relative h-screen flex items-end justify-end">
+              {/* Content Overlay */}
+              <div
+                className="h-[30px] w-[50%] bg-white relative"
+                style={{
+                  transform: `translateX(${-translateX * 15}px)`,
+                  transition:
+                    "transform 0.1s ease-out, left 0.3s ease-in-out, width 0.3s ease-in-out",
+                }}
+              >
+                <div className="absolute top-[-40px] right-0">
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M40 40V0C40 22.0914 22.0914 40 0 40H40Z"
+                      fill="#fcfcfc"
+                    ></path>
+                  </svg>
+                </div>
+                <div className="absolute top-[-40px] left-[47px] rotate-90">
+                  <svg
+                    width="40"
+                    height="40"
+                    viewBox="0 0 40 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M40 40V0C40 22.0914 22.0914 40 0 40H40Z"
+                      fill="#fcfcfc"
+                    ></path>
+                  </svg>
+                </div>
+              </div>
+              <div
+                className="relative z-10 flex flex-col items-end space-y-6 bg-white p-[30px_10px] rounded-[40px_0_0_0] text-center"
+                style={{
+                  transform: `translateX(${-translateX}px)`,
+                  transition:
+                    "transform 0.1s ease-out, left 0.3s ease-in-out, width 0.3s ease-in-out",
+                }}
+              >
+                {/* Text Box - Visible only on lg+ */}
+                <p className="tracking-[0] uppercase mix-blend-normal text-[3vw] font-semibold leading-[3vw]">
+                  Modern Software Solutions
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Features Section */}
+        {/* About section */}
         <div
-          className={`bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border`}
+          ref={aboutSectionRef}
+          className="bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border"
         >
-          <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col box-border bg-background-white">
-            <FeaturesSection />
+          <div className="relative flex justify-center">
+            <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col">
+              {/* Header */}
+              <div className="mb-[20px] md:mb-[40px] flex-shrink-0">
+                <p className="text-text-light text-sm md:text-base mb-2">
+                  (Who We Are)
+                </p>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary uppercase break-words">
+                  We build smart digital solutions
+                </h2>
+              </div>
+              <div className="flex justify-center items-center relative gap-5">
+                {/* Center Section - Image */}
+                <div className="w-[60%] flex-shrink-0 relative">
+                  {/* left Section - Text Content */}
+                  <div
+                    className="flex flex-col w-[50%] gap-5 absolute bottom-0 left-[-31.3%] bg-background-white z-20 rounded-[0_40px_0] p-3"
+                    style={{
+                      transform: `translateX(${aboutRightTranslate}px)`,
+                      transition: "transform 1s cubic-bezier(0.4, 0, 0.2, 1)",
+                      willChange: "transform",
+                    }}
+                  >
+                    <div className="flex flex-col gap-3 relative">
+                      <div className="absolute top-[-52px] right-[127px] rotate-90 z-30">
+                        <svg
+                          width="40"
+                          height="40"
+                          viewBox="0 0 40 40"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M40 40V0C40 22.0914 22.0914 40 0 40H40Z"
+                            fill="#fcfcfc"
+                          ></path>
+                        </svg>
+                      </div>
+                      <div className="absolute bottom-[-12px] right-[-52px] rotate-90 z-30">
+                        <svg
+                          width="40"
+                          height="40"
+                          viewBox="0 0 40 40"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M40 40V0C40 22.0914 22.0914 40 0 40H40Z"
+                            fill="#fcfcfc"
+                          ></path>
+                        </svg>
+                      </div>
+                      <h3 className="text-lg md:text-2xl lg:text-3xl font-bold text-text-primary uppercase break-words relative">
+                        💻 Development & Engineering
+                      </h3>
+                      <p className="text-[#7a7a7a]">
+                        Nous développons des applications web, mobiles et
+                        logicielles fiables, évolutives et performantes, pensées
+                        pour soutenir la croissance de votre activité.
+                      </p>
+                      <Button
+                        variant="secondary"
+                        className="w-fit mt-2 mx-auto rounded-lg px-6 py-3"
+                      >
+                        Read More →
+                      </Button>
+                    </div>
+                  </div>
+                  <img
+                    src="/about.jpg"
+                    alt="About"
+                    className="w-full grayscale-[70%] rounded-[40px]"
+                  />
+                </div>
+
+                {/* rigth Section - Statistics */}
+                <div
+                  className="flex flex-col gap-8 w-[25%] absolute bottom-0 right-0"
+                  style={{
+                    transform: `translateX(${aboutLeftTranslate}px)`,
+                    transition: "transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)",
+                    willChange: "transform",
+                  }}
+                >
+                  <div className="bg-background-white rounded-[20px] p-3">
+                    <div className="flex items-start">
+                      <div className="text-[4rem] font-normal leading-[0.7]">
+                        4
+                      </div>
+                      <div className="text-[2rem] font-semibold leading-[0.5] text-accent-red">
+                        +
+                      </div>
+                    </div>
+                    <div className="text-[#7a7a7a] text-xl font-extralight leading-[1.1] uppercase mt-[10px]">
+                      years experience
+                    </div>
+                  </div>
+                  <div className="bg-background-white rounded-[20px] p-3">
+                    <div className="flex items-start">
+                      <div className="text-[4rem] font-normal leading-[0.7]">
+                        18
+                      </div>
+                      <div className="text-[2rem] font-semibold leading-[0.5] text-accent-red">
+                        +
+                      </div>
+                    </div>
+                    <div className="text-[#7a7a7a] text-xl font-extralight leading-[1.1] uppercase mt-[10px]">
+                      projects done
+                    </div>
+                  </div>
+                  <div className="bg-background-white rounded-[20px] p-3">
+                    <div className="flex items-start">
+                      <div className="text-[4rem] font-normal leading-[0.7]">
+                        8
+                      </div>
+                      <div className="text-[2rem] font-semibold leading-[0.5] text-accent-red">
+                        +
+                      </div>
+                    </div>
+                    <div className="text-[#7a7a7a] text-xl font-extralight leading-[1.1] uppercase mt-[10px]">
+                      happy clients
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="flex flex-col">
+                <div className="md:text-lg lg:text-lg font-bold text-text-primary my-8 greyscale">
+                  Tools & Technology :
+                </div>
+                <div className="overflow-hidden w-full md:w-auto mt-4 md:mt-0">
+                  <div className="flex items-center gap-6 md:gap-[40px] animate-scroll-left grayscale whitespace-nowrap">
+                    {[...technologyLogos, ...technologyLogos].map(
+                      (logo, index) => {
+                        const LogoComponent = logo.component;
+                        return (
+                          <div
+                            key={`left-${logo.id}-${index}`}
+                            className="flex items-center justify-center flex-shrink-0 gap-5"
+                          >
+                            <LogoComponent />
+                            <p className="text-text-secondary text-sm md:text-base font-medium">
+                              {logo.title}
+                            </p>
+                          </div>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
+                <div className="overflow-hidden w-full md:w-auto mt-[20px] md:mt-[40px]">
+                  <div className="flex items-center gap-6 md:gap-[40px] animate-scroll-right grayscale whitespace-nowrap">
+                    {[...technologyLogos, ...technologyLogos].map(
+                      (logo, index) => {
+                        const LogoComponent = logo.component;
+                        return (
+                          <div
+                            key={`right-${logo.id}-${index}`}
+                            className="flex items-center justify-center flex-shrink-0 gap-5"
+                          >
+                            <LogoComponent />
+                            <p className="text-text-secondary text-sm md:text-base font-medium">
+                              {logo.title}
+                            </p>
+                          </div>
+                        );
+                      }
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
         {/* Services Section */}
         <div
+          ref={servicesSectionRef}
           className={`bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border`}
         >
           <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col box-border">
-            <ServicesSection />
+            <ServicesSection
+              serviceRefs={serviceRefs}
+              serviceTranslates={serviceTranslates}
+            />
           </div>
+        </div>
+
+        {/* Features Section */}
+        <div className="relative bg-white w-full block mt-0 pt-32 pb-16 px-4 md:px-8 lg:px-12 xl:px-20">
+          {/* Header */}
+          <div className="flex-shrink-0">
+            <p className="text-text-light text-sm md:text-base mb-2">
+              (Our Services)
+            </p>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary uppercase break-words">
+              EXPLORE WHAT WE CAN DO FOR YOU
+            </h2>
+          </div>
+          {features.map((feature, index) => {
+            const transform = featureTransforms[index] || {
+              translateY: 20,
+              scale: 0.75,
+              rotateX: -12,
+            };
+            return (
+              <div
+                key={feature.id}
+                ref={(el) => {
+                  featureRefs.current[index] = el;
+                }}
+                className="w-full h-[100vh] sticky flex justify-center items-start top-[4vh]"
+              >
+                <div
+                  className="rounded-[40px] w-full h-[80vh] relative overflow-hidden flex justify-center items-center"
+                  style={{
+                    willChange: "transform",
+                    transform: `translate3d(0px, ${transform.translateY}%, 0px) scale3d(${transform.scale}, ${transform.scale}, 1) rotateX(${transform.rotateX}deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg)`,
+                    transformStyle: "preserve-3d",
+                  }}
+                >
+                  <div className="flex justify-center items-center absolute inset-0">
+                    <img
+                      src={`/${feature.img}`}
+                      alt="Image"
+                      className="object-cover w-full h-full absolute inset-0 rounded-[40px] grayscale-[70%]"
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Contact Section */}
         <div
           className={`bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border`}
+          style={{
+            backgroundImage: "url('/bgc.svg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            backgroundAttachment: "fixed",
+          }}
         >
           <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col box-border">
             <ContactSection />
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <Footer />
     </main>
   );
 }

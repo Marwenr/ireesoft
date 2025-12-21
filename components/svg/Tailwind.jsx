@@ -1,6 +1,6 @@
 import React from "react";
 
-const Tailwind = ({ width = "80", height = "80" }) => {
+const Tailwind = ({ width = "50", height = "50" }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 32 32" fill="#ffffff">
       <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

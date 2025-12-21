@@ -15,7 +15,15 @@ interface Service {
   };
 }
 
-const ServicesSection: React.FC = () => {
+interface ServicesSectionProps {
+  serviceRefs?: React.MutableRefObject<(HTMLDivElement | null)[]>;
+  serviceTranslates?: number[];
+}
+
+const ServicesSection: React.FC<ServicesSectionProps> = ({
+  serviceRefs = [],
+  serviceTranslates = [],
+}) => {
   const [expandedService, setExpandedService] = useState<number | null>(1); // BRANDING expanded by default
 
   const services: Service[] = [
@@ -100,9 +108,19 @@ const ServicesSection: React.FC = () => {
           return (
             <div
               key={service.id}
+              ref={(el) => {
+                if (serviceRefs?.current) {
+                  serviceRefs.current[index] = el;
+                }
+              }}
               className={`border-b border-background-gray pb-3 md:pb-4 flex-shrink-0 w-full max-w-full box-border ${
                 index === 0 ? "border-t border-background-gray" : ""
               }`}
+              style={{
+                transform: `translateY(${serviceTranslates[index] || 0}px)`,
+                transition: "transform 1s cubic-bezier(0.4, 0, 0.2, 1)",
+                willChange: "transform",
+              }}
             >
               {/* Service Header - Clickable */}
               <button
@@ -115,7 +133,7 @@ const ServicesSection: React.FC = () => {
                   </span>
                   <div className="flex items-end space-x-2 md:space-x-3 min-w-0 flex-1 box-border">
                     <h3
-                      className={`text-3xl md:text-4xl lg:text-6xl font-bold uppercase transition-colors duration-300 break-words overflow-wrap-anywhere min-w-0 ${
+                      className={`text-3xl md:text-4xl lg:text-6xl font-bold uppercase transition-colors duration-300 break-words overflow-wrap-anywhere min-w-0 group-hover:text-accent-orange ${
                         isExpanded ? "text-accent-orange" : "text-text-primary"
                       }`}
                     >
