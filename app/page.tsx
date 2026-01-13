@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import Spline from "@splinetool/react-spline";
 import Sidebar from "@/components/Sidebar";
 import ServicesSection from "@/components/ServicesSection";
+import ProjectsSection from "@/components/ProjectsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import Button from "@/components/Button";
@@ -21,9 +22,11 @@ import {
   Vercel,
   Ovh,
 } from "../components/svg";
+import Input from "@/components/Input";
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(1);
   const [translateX, setTranslateX] = useState(0);
   const [sidebarWidth, setSidebarWidth] = useState(64);
   const [aboutLeftTranslate, setAboutLeftTranslate] = useState(400);
@@ -37,6 +40,11 @@ export default function Home() {
     250, 500, 750, 1000,
   ]);
   const servicesSectionRef = useRef<HTMLDivElement>(null);
+  const projectRefs = useRef<(HTMLDivElement | null)[]>(Array(10).fill(null));
+  const [projectTranslates, setProjectTranslates] = useState<number[]>([
+    250, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500,
+  ]);
+  const projectsSectionRef = useRef<HTMLDivElement>(null);
   const [featureTransforms, setFeatureTransforms] = useState<
     Array<{
       translateY: number;
@@ -395,6 +403,181 @@ export default function Home() {
     };
   }, []);
 
+  // Projects scroll animation - slides in from bottom (1000px), one after another
+  useEffect(() => {
+    const handleProjectScroll = () => {
+      if (!projectsSectionRef.current) return;
+
+      const projectsSection = projectsSectionRef.current;
+      const viewportHeight = window.innerHeight;
+      const sectionRect = projectsSection.getBoundingClientRect();
+      const sectionTop = sectionRect.top;
+
+      // Animation starts when section top is at viewport bottom
+      // Animation ends when section top is at viewport center
+      const animationStart = viewportHeight;
+      const animationEnd = viewportHeight * 0.3;
+
+      // Animation: slide projects in from bottom (1000px) as section enters viewport
+      if (sectionTop <= animationStart && sectionTop >= animationEnd) {
+        // Calculate progress (0 to 1)
+        const scrollProgress =
+          (animationStart - sectionTop) / (animationStart - animationEnd);
+        const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+
+        // Use easing function for smoother animation
+        const easeOutCubic = 1 - Math.pow(1 - clampedProgress, 3);
+
+        // Each project animates with a delay based on index (staggered)
+        projectRefs.current.forEach((ref, index) => {
+          if (!ref) return;
+
+          const delay = index * 0.15; // 15% delay between each project
+          const delayedProgress = Math.max(
+            0,
+            Math.min(1, (clampedProgress - delay) / (1 - delay))
+          );
+
+          // Use easing for delayed progress
+          const easeOutCubicDelayed = 1 - Math.pow(1 - delayedProgress, 3);
+
+          // Project starts at 1000px (below position), translates to 0 (its position)
+          const projectStart = 1000;
+          const projectTranslate =
+            projectStart - easeOutCubicDelayed * projectStart;
+
+          setProjectTranslates((prev) => {
+            const newTranslates = [...prev];
+            newTranslates[index] = projectTranslate;
+            return newTranslates;
+          });
+        });
+      } else if (sectionTop > animationStart) {
+        // Before section enters viewport, keep off-screen positions (1000px)
+        setProjectTranslates([
+          250, 500, 750, 1000, 1250, 1500, 1750, 2000, 2250, 2500,
+        ]);
+      } else {
+        // After animation end, content is in place (at 0)
+        setProjectTranslates([0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+      }
+    };
+
+    window.addEventListener("scroll", handleProjectScroll, { passive: true });
+    handleProjectScroll(); // Initial call
+
+    return () => {
+      window.removeEventListener("scroll", handleProjectScroll);
+    };
+  }, []);
+
+  //contact form :
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+    services: "",
+  });
+
+  const [errors, setErrors] = useState<{
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    message?: string;
+  }>({});
+
+  const services = [
+    "Développement Web",
+    "Développement Mobile",
+    "UI / UX Design",
+    "Logiciel sur mesure",
+    "Stratégie & Consulting",
+    "Autre",
+  ];
+
+  const faqs = [
+    {
+      question: "What is included in your branding services?",
+      answer:
+        "Our branding services include logo design, brand identity development, color palette selection, typography choices, and brand guidelines documentation.",
+    },
+    {
+      question: "How long does it take to complete a branding project?",
+      answer:
+        "The timeline varies depending on the scope, but a typical branding project takes 4–6 weeks from initial consultation to final delivery.",
+    },
+    {
+      question: "Do you offer mobile-friendly designs?",
+      answer:
+        "Yes, all our designs are mobile-responsive and optimized for various screen sizes and devices.",
+    },
+    {
+      question: "Can you redesign an existing website?",
+      answer:
+        "Absolutely! We specialize in website redesigns that improve both aesthetics and functionality while maintaining your brand identity.",
+    },
+    {
+      question: "Do you provide custom development solutions?",
+      answer:
+        "Yes, we offer custom development solutions tailored to your specific business needs and requirements.",
+    },
+  ];
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    if (errors[name as keyof typeof errors]) {
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors: typeof errors = {};
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "Le prénom est requis";
+    }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Le nom est requis";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "L'email est requis";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = "Email invalide";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Le message est requis";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (validateForm()) {
+      console.log("Form submitted:", formData);
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+        services: "",
+      });
+      alert("Merci pour votre message ! Nous vous répondrons rapidement.");
+    }
+  };
+
   return (
     <main className="min-h-screen">
       <Sidebar onToggle={setSidebarOpen} />
@@ -729,19 +912,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Services Section */}
-        <div
-          ref={servicesSectionRef}
-          className={`bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border`}
-        >
-          <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col box-border">
-            <ServicesSection
-              serviceRefs={serviceRefs}
-              serviceTranslates={serviceTranslates}
-            />
-          </div>
-        </div>
-
         {/* Features Section */}
         <div className="relative bg-white w-full block mt-0 pt-32 pb-16 px-4 md:px-8 lg:px-12 xl:px-20">
           {/* Header */}
@@ -788,16 +958,298 @@ export default function Home() {
           })}
         </div>
 
+        {/* Services Section */}
+        <div
+          ref={servicesSectionRef}
+          className={`bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border`}
+        >
+          <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col box-border">
+            <ServicesSection
+              serviceRefs={serviceRefs}
+              serviceTranslates={serviceTranslates}
+            />
+          </div>
+        </div>
+
+        {/* Last Projects Section */}
+        <div
+          ref={projectsSectionRef}
+          className="bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border"
+        >
+          <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col box-border">
+            <ProjectsSection
+              projectRefs={projectRefs}
+              projectTranslates={projectTranslates}
+            />
+          </div>
+        </div>
+
+        {/* Contact Section */}
+        <div className="bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border pt-[200px]">
+          <div className="relative flex justify-center  h-[100vh]">
+            <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col">
+              <div className="flex justify-between items-start gap-[64px]">
+                {/* left Section */}
+                <div className="w-[calc(50%-32px)]">
+                  {/* Header */}
+                  <div className="mb-[20px] md:mb-[40px] flex-shrink-0">
+                    <p className="text-text-light text-sm md:text-base mb-2">
+                      (Who We Are)
+                    </p>
+                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-text-primary uppercase break-words">
+                      We build smart digital solutions
+                    </h2>
+                  </div>
+                  <div className="mb-2 md:mb-3 flex-shrink-0">
+                    <div>
+                      <div className="mb-1 font-semibold">Email :</div>
+                      <div>contact@xxxxagency.com</div>
+                    </div>
+                  </div>
+                  <div className="mb-2 md:mb-3 flex-shrink-0">
+                    <div>
+                      <div className="mb-1 font-semibold">Email :</div>
+                    </div>
+                  </div>
+                  <div className="mb-2 md:mb-3 flex-shrink-0">
+                    <div>
+                      <div className="mb-1 font-semibold">Email :</div>
+                      <div>contact@xxxxagency.com</div>
+                    </div>
+                  </div>
+                  <div className="mb-4 md:mb-5 flex-shrink-0">
+                    <div>
+                      <div className="mb-1 font-semibold">Telephone :</div>
+                      <div>+216 21 211 211</div>
+                    </div>
+                  </div>
+                  {/* Main Content: Form and Contact Methods */}
+                  <div className="w-full">
+                    <form onSubmit={handleSubmit}>
+                      {/* First Name & Last Name */}
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+                        <Input
+                          type="text"
+                          name="firstName"
+                          value={formData.firstName}
+                          onChange={handleChange}
+                          placeholder="Prénom"
+                          error={errors.firstName}
+                          required
+                        />
+                        <Input
+                          type="text"
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleChange}
+                          placeholder="Nom"
+                          error={errors.lastName}
+                          required
+                        />
+                      </div>
+
+                      {/* Email */}
+                      <Input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="vous@entreprise.com"
+                        error={errors.email}
+                        required
+                      />
+
+                      {/* select */}
+                      <div className="w-full my-3">
+                        <select
+                          name="services"
+                          value={formData.services}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-lg bg-background-white border border-background-gray focus:outline-none focus:ring-2 focus:ring-primary-dark focus:border-transparent transition-all duration-200 ${
+                            formData.services === ""
+                              ? "text-text-light"
+                              : "text-text-primary"
+                          }`}
+                        >
+                          <option value="" disabled hidden>
+                            Sélectionnez un service
+                          </option>
+                          {services.map((service) => (
+                            <option key={service} value={service}>
+                              {service}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      {/* Message */}
+                      <div className="w-full my-3">
+                        <textarea
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          placeholder="Laissez-nous un message..."
+                          rows={6}
+                          className={`
+                    w-full px-4 py-3 rounded-lg
+                    bg-background-white border border-background-gray
+                    text-text-primary placeholder-text-light
+                    focus:outline-none focus:ring-2 focus:ring-primary-dark focus:border-transparent
+                    transition-all duration-200 resize-none
+                    ${
+                      errors.message
+                        ? "border-accent-red focus:ring-accent-red"
+                        : ""
+                    }
+                  `}
+                          required
+                        />
+                        {errors.message && (
+                          <p className="mt-1 text-sm text-accent-red">
+                            {errors.message}
+                          </p>
+                        )}
+                      </div>
+
+                      {/* Submit Button */}
+                      <button
+                        type="submit"
+                        className="bg-primary-dark rounded-[12px] px-6 md:px-8 lg:px-10 py-2 md:py-3 lg:py-3 shadow-xl hover:bg-primary-light transition-all duration-200 w-full mt-4"
+                      >
+                        <p className="text-background-white text-base md:text-lg font-semibold">
+                          Envoyer le message
+                        </p>
+                      </button>
+                    </form>
+                  </div>
+                </div>
+                {/* right Section */}
+                <div className="w-[calc(50%-32px)] flex flex-col justify-center items-center relative gap-5">
+                  {/* Center Section - Image */}
+                  <div className="w-[100%] flex-shrink-0 relative">
+                    {/* left Section - Text Content */}
+                    <div className="w-[14vw] absolute bottom-0 left-[0] bg-background-white z-20 rounded-[0_40px_0] p-3">
+                      <div className="flex justify-center items-center relative">
+                        <div className="absolute top-[-52px] left-[-12px] rotate-90 z-30">
+                          <svg
+                            width="40"
+                            height="40"
+                            viewBox="0 0 40 40"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M40 40V0C40 22.0914 22.0914 40 0 40H40Z"
+                              fill="#fcfcfc"
+                            ></path>
+                          </svg>
+                        </div>
+                        <div className="absolute bottom-[-12px] right-[-52px] rotate-90 z-30">
+                          <svg
+                            width="40"
+                            height="40"
+                            viewBox="0 0 40 40"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M40 40V0C40 22.0914 22.0914 40 0 40H40Z"
+                              fill="#fcfcfc"
+                            ></path>
+                          </svg>
+                        </div>
+                        <p className="text-[1.25rem] font-extralight">
+                          Let’s Make Something Amazing Together
+                        </p>
+                      </div>
+                    </div>
+                    <img
+                      src="/about.jpg"
+                      alt="About"
+                      className="w-full grayscale-[70%] rounded-[40px]"
+                    />
+                  </div>
+                  <div className="w-full mt-8">
+                    <div className="space-y-0">
+                      {faqs.map((faq, index) => {
+                        const isOpen = openFaqIndex === index;
+                        return (
+                          <div
+                            key={index}
+                            className="border-b border-gray-300 last:border-b-0"
+                          >
+                            <button
+                              onClick={() =>
+                                setOpenFaqIndex(isOpen ? null : index)
+                              }
+                              className="w-full flex items-center justify-between py-4 text-left group"
+                            >
+                              <span
+                                className={`text-base md:text-lg font-bold transition-colors ${
+                                  isOpen
+                                    ? "text-accent-red"
+                                    : "text-text-primary"
+                                }`}
+                              >
+                                {faq.question}
+                              </span>
+                              <div className="flex-shrink-0 ml-4">
+                                <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center transition-colors group-hover:bg-gray-300">
+                                  {isOpen ? (
+                                    <svg
+                                      width="12"
+                                      height="12"
+                                      viewBox="0 0 12 12"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M1 1L11 11M11 1L1 11"
+                                        stroke="black"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                      />
+                                    </svg>
+                                  ) : (
+                                    <svg
+                                      width="12"
+                                      height="12"
+                                      viewBox="0 0 12 12"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M6 1V11M1 6H11"
+                                        stroke="black"
+                                        strokeWidth="2"
+                                        strokeLinecap="round"
+                                      />
+                                    </svg>
+                                  )}
+                                </div>
+                              </div>
+                            </button>
+                            {isOpen && (
+                              <div className="pb-4 pt-2">
+                                <p className="text-text-secondary text-sm md:text-base font-normal leading-relaxed">
+                                  {faq.answer}
+                                </p>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Contact Section */}
         <div
           className={`bg-background-white relative z-10 transition-all duration-300 ease-in-out w-full max-w-full overflow-hidden box-border`}
-          style={{
-            backgroundImage: "url('/bgc.svg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            backgroundRepeat: "no-repeat",
-            backgroundAttachment: "fixed",
-          }}
         >
           <div className="w-full max-w-full px-4 md:px-8 lg:px-12 xl:px-20 py-6 md:py-8 flex flex-col box-border">
             <ContactSection />
