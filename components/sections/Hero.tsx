@@ -9,8 +9,6 @@ import Button from "@/components/ui/Button";
 import CalendarIcon from "@/components/icons/Calendar";
 
 export interface HeroProps extends React.HTMLAttributes<HTMLElement> {
-  videoSrc?: string;
-  videoPoster?: string;
   badgeText?: string;
   heading: string;
   description: string;
@@ -23,13 +21,11 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
   (
     {
       className,
-      videoSrc,
-      videoPoster,
-      badgeText = "NEW GEN AI AUTOMATION PARTNER",
+      badgeText,
       heading,
       description,
-      ctaText = "Book A Free Call Now",
-      ctaHref = "#",
+      ctaText,
+      ctaHref,
       showVideo = true,
       ...props
     },
@@ -106,7 +102,7 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
                         } as React.CSSProperties
                       }
                     >
-                      Trusted by big brands around the world
+                      Trusted by startups, businesses & project owners
                     </p>
                   </div>
                 </div>

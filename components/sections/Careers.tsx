@@ -182,7 +182,7 @@ const Careers = React.forwardRef<HTMLElement, CareersProps>(
       heading = "Making future easy",
       imageSrc = "https://framerusercontent.com/images/DXfOsleNgbkx2P2iCFSWIjtgh8s.jpg?scale-down-to=2048&width=1597&height=2772",
       quoteText = "We Know your problems. We know your target audience and how you can grow rapidly with the help of automation",
-      quoteAuthor = "Co-founder at landerOS",
+      quoteAuthor = "Co-founder at IREESOFT",
       jobs = defaultJobs,
       ctaPrimaryText = "Check All Job Openings",
       ctaPrimaryHref = "https://www.linkedin.com/",

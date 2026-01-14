@@ -108,7 +108,7 @@ const FAQ = React.forwardRef<HTMLElement, FAQProps>(
       description = "We're here to help you and solve objections. Find answers to the most common questions below.",
       ctaText = "Contact Sales Now",
       ctaHref = "./contact",
-      email = "landeros@email.com",
+      email = "contact@ireesoft.com",
       emailText = "Feel free to mail us for any enquiries : ",
       faqs = defaultFAQs,
       ...props

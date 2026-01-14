@@ -8,35 +8,35 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    default: "Your App Name",
-    template: "%s | Your App Name",
+    default: "IREESOFT",
+    template: "%s | IREESOFT",
   },
-  description: "Your app description here",
-  keywords: ["keyword1", "keyword2", "keyword3"],
-  authors: [{ name: "Your Name" }],
-  creator: "Your Name",
+  description: "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
+  keywords: ["développement logiciel", "software development", "IREESOFT", "société de développement", "développement web", "solutions logicielles"],
+  authors: [{ name: "IREESOFT" }],
+  creator: "IREESOFT",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://yourwebsite.com",
-    siteName: "Your App Name",
-    title: "Your App Name",
-    description: "Your app description here",
+    siteName: "IREESOFT",
+    title: "IREESOFT - Société de Développement Logiciel",
+    description: "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Your App Name",
+        alt: "IREESOFT",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Your App Name",
-    description: "Your app description here",
+    title: "IREESOFT - Société de Développement Logiciel",
+    description: "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
     images: ["/og-image.jpg"],
-    creator: "@yourusername",
+    creator: "@ireesoft",
   },
   robots: {
     index: true,

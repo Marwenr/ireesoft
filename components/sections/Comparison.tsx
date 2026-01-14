@@ -31,22 +31,22 @@ const defaultCards: ComparisonCard[] = [
     logo: "https://framerusercontent.com/images/nMv7QpjHFBtmbFraoRRxar88cw.png?width=720&height=720",
     isPositive: true,
     points: [
-      { text: "Fast setup with ready AI workflows" },
-      { text: "Built to grow and adapt with you" },
-      { text: "Real-time, AI-powered analytics" },
-      { text: "Automates tasks, reducing overhead" },
-      { text: "Expert support + AI guidance" },
+      { text: "Fast deployment of web, mobile, and enterprise software" },
+      { text: "Fully customizable to fit your unique business needs" },
+      { text: "Scalable platforms built to grow with your business" },
+      { text: "Integrated features for productivity, analytics, and automation" },
+      { text: "Expert support and guidance throughout development" },
     ],
   },
   {
     title: "Others",
     isPositive: false,
     points: [
-      { text: "Slower execution and manual setup" },
-      { text: "Requires manual updates as you scale" },
-      { text: "Limited or delayed reporting" },
-      { text: "Higher labor costs, less automation" },
-      { text: "Generic support or none at all" },
+      { text: "Slower delivery with generic solutions" },
+      { text: "One-size-fits-all solutions that don’t adapt" },
+      { text: "Requires manual upgrades or replacements as you scale" },
+      { text: "Limited functionality and fragmented tools" },
+      { text: "Generic or minimal support" },
     ],
   },
 ];
@@ -56,8 +56,8 @@ const Comparison = React.forwardRef<HTMLElement, ComparisonProps>(
     {
       className,
       badgeText = "COMPARISON",
-      heading = "Why Choose Us",
-      description = "We help businesses harness the power of AI to work smarter, scale faster, and innovate boldly using custom automation & solutions.",
+      heading = "Why Choose Ireesoft?",
+      description = "We deliver custom software solutions that help businesses operate smarter, grow faster, and stay ahead of the competition.",
       cards = defaultCards,
       ...props
     },

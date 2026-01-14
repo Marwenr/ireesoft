@@ -21,11 +21,10 @@ export default function Home() {
   return (
     <main>
       <Hero
-        videoSrc="https://framerusercontent.com/assets/V9SkoRvPZYT1Y9hArxh9cYxdQLA.mp4"
-        badgeText="NEW GEN AI AUTOMATION PARTNER"
-        heading="Lead your business with AI-Automation"
-        description="We help businesses harness the power of AI to work smarter, scale faster, and innovate boldly using custom automation & intelligent solutions."
-        ctaText="Book A Free Call Now"
+        badgeText="NEW-GEN SOFTWARE & AI PARTNER"
+        heading="Power Your Business with Custom Software & AI"
+        description="Ireesoft delivers custom software, web & mobile applications, AI solutions, and secure hosting to help companies grow faster and smarter."
+        ctaText="Let’s Build Your Solution"
         ctaHref="https://cal.com/"
         showVideo={true}
       />

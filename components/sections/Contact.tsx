@@ -63,7 +63,7 @@ const Contact = React.forwardRef<HTMLElement, ContactProps>(
     {
       className,
       heading = "Get in touch with Us",
-      email = "landeros@email.com",
+      email = "contact@ireesoft.com",
       phone = "+1234567890",
       ...props
     },

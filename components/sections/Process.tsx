@@ -32,23 +32,22 @@ const defaultSteps: ProcessStep[] = [
   {
     number: 1,
     icon: <WorkflowIcon className="w-6 h-6" />,
-    title: "Workflow Assessment",
-    description:
-      "We begin by examining your existing workflows to identify where AI can deliver the greatest impact.",
+    title: "Discovery & Assessment",
+    description: "We analyze your business goals and technical needs to define the right strategy, architecture, and scope.",
   },
   {
     number: 2,
     icon: <DeployIcon className="w-6 h-6" />,
-    title: "Deploy with Confidence",
+    title: "Design, Build & Deploy",
     description:
-      "Our team develops custom AI systems built around your goals, ensuring safe and reliable deployment.",
+      "We design, develop, and deploy secure, scalable software solutions tailored to your project.",
   },
   {
     number: 3,
     icon: <SupportIcon className="w-6 h-6" />,
-    title: "Ongoing Support",
+    title: "Monitor, Support & Scale",
     description:
-      "After deployment, we provide support and refine your AI systems to keep them performing at their best.",
+      "We provide continuous support, performance monitoring, and help your solution scale as you grow.",
   },
 ];
 
@@ -62,9 +61,9 @@ const Process = React.forwardRef<HTMLElement, ProcessProps>(
   (
     {
       className,
-      badgeText = "PROCESS",
-      heading = "Process Is Performance",
-      description = "Strategic, AI-driven steps built to grow your business faster, smarter, and stronger with measurable results",
+      badgeText = "HOW WE WORK",
+      heading = "From Idea to Production",
+      description = "A structured, technology-driven approach designed to build scalable software, deploy with confidence, and deliver long-term value.",
       steps = defaultSteps,
       stats = defaultStats,
       ...props

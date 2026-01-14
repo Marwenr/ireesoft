@@ -22,7 +22,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
     {
       className,
       logoHref = "/",
-      logoImage = "https://framerusercontent.com/images/JsGMOpYyOI1Bo4sAwlN6nDlrh8.svg",
+      logoImage = "/logo.svg",
       navItems = [
         { label: "Product", href: "/#services" },
         { label: "Integrations", href: "/#integrations" },
@@ -32,7 +32,7 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
         { label: "Careers", href: "/#careers" },
       ],
       socialLinks,
-      copyrightText = "© 2025 LanderOS",
+      copyrightText = "© 2025 IREESOFT",
       ...props
     },
     ref
@@ -202,7 +202,15 @@ const Footer = React.forwardRef<HTMLElement, FooterProps>(
             )}
           >
             <p className="text-sm font-sans text-foreground opacity-90">
-              {copyrightText}
+              © 2025{" "}
+              <Link
+                href="https://www.ireesoft.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:opacity-100 transition-opacity underline"
+              >
+                IREESOFT
+              </Link>
             </p>
           </div>
         </div>
