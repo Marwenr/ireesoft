@@ -11,20 +11,29 @@ export const metadata: Metadata = {
     default: "IREESOFT",
     template: "%s | IREESOFT",
   },
-  description: "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
-  keywords: ["développement logiciel", "software development", "IREESOFT", "société de développement", "développement web", "solutions logicielles"],
+  description:
+    "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
+  keywords: [
+    "développement logiciel",
+    "software development",
+    "IREESOFT",
+    "société de développement",
+    "développement web",
+    "solutions logicielles",
+  ],
   authors: [{ name: "IREESOFT" }],
   creator: "IREESOFT",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yourwebsite.com",
+    url: "https://www.ireesoft.com/",
     siteName: "IREESOFT",
     title: "IREESOFT - Société de Développement Logiciel",
-    description: "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
+    description:
+      "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/logo-navbar.svg",
         width: 1200,
         height: 630,
         alt: "IREESOFT",
@@ -34,8 +43,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "IREESOFT - Société de Développement Logiciel",
-    description: "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
-    images: ["/og-image.jpg"],
+    description:
+      "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
+    images: ["/logo-navbar.svg"],
     creator: "@ireesoft",
   },
   robots: {
@@ -50,9 +60,9 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "/logo-navbar.svg",
+    shortcut: "/logo-navbar.svg",
+    apple: "/logo-navbar.svg",
   },
   manifest: "/site.webmanifest",
   viewport: {
@@ -77,4 +87,3 @@ export default function RootLayout({
     </html>
   );
 }
-
