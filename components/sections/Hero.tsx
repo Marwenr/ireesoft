@@ -58,7 +58,7 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
             )}
 
             {/* Heading */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground leading-tight max-w-5xl">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight max-w-5xl">
               {heading}
             </h1>
 
@@ -102,7 +102,8 @@ const Hero = React.forwardRef<HTMLElement, HeroProps>(
                         } as React.CSSProperties
                       }
                     >
-                      Trusted by startups, businesses & project owners
+                      Trusted by startups and growing businesses to deliver
+                      high-performance software.
                     </p>
                   </div>
                 </div>

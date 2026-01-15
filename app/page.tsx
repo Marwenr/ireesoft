@@ -1,5 +1,6 @@
 import Hero from "@/components/sections/Hero";
 import Process from "@/components/sections/Process";
+import Community from "@/components/sections/Community";
 import Projects from "@/components/sections/Projects";
 import Comparison from "@/components/sections/Comparison";
 import Integrations from "@/components/sections/Integrations";
@@ -22,7 +23,7 @@ export default function Home() {
     <main>
       <Hero
         badgeText="NEW-GEN SOFTWARE & AI PARTNER"
-        heading="Power Your Business with Custom Software & AI"
+        heading="Power Your Business with Custom Software & Intelligent Solutions"
         description="Ireesoft delivers custom software, web & mobile applications, AI solutions, and secure hosting to help companies grow faster and smarter."
         ctaText="Let’s Build Your Solution"
         ctaHref="https://cal.com/"
@@ -30,6 +31,8 @@ export default function Home() {
       />
 
       <Process />
+
+      <Community />
 
       <Projects />
 

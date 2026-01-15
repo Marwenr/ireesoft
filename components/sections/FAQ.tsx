@@ -56,46 +56,46 @@ const defaultFAQs: FAQItem[][] = [
   // Left column
   [
     {
-      question: "What is included in the Starter plan?",
+      question: "What industries do you work with?",
       answer:
-        "The Starter plan includes all essential features to get you started with our platform.",
+        "We work with startups, SMEs, and enterprises across multiple industries, including technology, healthcare, logistics, e-commerce, and professional services.",
     },
     {
-      question: "Can I switch plans later?",
+      question: "Can you join an existing project?",
       answer:
-        "Yes, you can upgrade or downgrade your plan at any time from your account settings.",
+        "Yes. We can integrate into your existing team, take ownership of specific features or modules, or collaborate on defined technical tasks at any stage of the project.",
     },
     {
-      question: "How secure is my data?",
+      question: "Do you provide long-term support?",
       answer:
-        "We use enterprise-grade encryption and security measures to protect your data at all times.",
+        "Absolutely. We offer ongoing maintenance, monitoring, performance optimization, and continuous improvements after launch.",
     },
     {
-      question: "Can I integrate this platform with other tools?",
+      question: "Do you build custom software or use ready-made solutions?",
       answer:
-        "Yes, our platform offers extensive integration capabilities with popular tools and services.",
+        "We specialize in custom-built solutions tailored to your exact business needs. When relevant, we also integrate trusted third-party tools to accelerate delivery without compromising quality.",
     },
   ],
   // Right column
   [
     {
-      question: "Do you offer a free trial?",
+      question: "Do you work with startups or only large companies?",
       answer:
-        "Yes, we offer a 14-day free trial with full access to all features.",
+        "Both. We support early-stage startups, growing companies, and enterprises by adapting our process, scope, and team size to each client’s maturity and budget.",
     },
     {
-      question: "What payment methods do you accept?",
-      answer: "We accept all major credit cards, PayPal, and bank transfers.",
+      question: "Can you handle cloud and on-premise deployments?",
+      answer: "Yes. We design and deploy solutions on cloud platforms (OVH, Vercel, GCP), hybrid infrastructures, or fully on-premise environments based on your security and compliance needs.",
     },
     {
-      question: "How does the 2% donation work?",
+      question: "Do you offer AI and automation solutions?",
       answer:
-        "We automatically donate 2% of our revenue to selected charitable organizations.",
+        "Yes. We develop and integrate AI solutions such as OCR (image-to-text), intelligent automation, data processing, and LLM-based systems focused on real business value.",
     },
     {
-      question: "What makes your platform different?",
+      question: "How do you ensure project quality and security?",
       answer:
-        "Our platform combines cutting-edge AI technology with user-friendly design and exceptional customer support.",
+        "We follow best practices in architecture, code quality, testing, and security. Our process includes code reviews, automated testing, and performance monitoring to ensure reliable and scalable solutions.",
     },
   ],
 ];
