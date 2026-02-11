@@ -3,85 +3,111 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply box-border;
-  }
+  :root {
+    /* Primary: #2563EB - Blue */
+    --primary: 217 91% 53%;
+    --primary-foreground: 0 0% 100%;
+    --primary-soft: 226 100% 94%;
 
-  html,
-  body {
-    @apply m-0 p-0;
-  }
+    /* Secondary: #0F172A - Dark navy */
+    --secondary: 222 47% 11%;
+    --secondary-foreground: 210 40% 98%;
 
-  body {
-    @apply bg-background text-foreground font-sans text-base;
-  }
+    /* Accent: #22D3EE - Cyan */
+    --accent: 188 86% 53%;
+    --accent-foreground: 222 47% 11%;
+    --accent-soft: 186 100% 96%;
 
-  input,
-  textarea,
-  select,
-  button {
-    @apply font-sans text-base;
+    /* Background: #F4F6FA - Slightly tinted */
+    --background: 223 32% 97%;
+    --background-section: 220 33% 95%;
+    --foreground: 222 47% 11%;
+
+    /* Text colors */
+    --muted: 220 33% 95%;
+    --muted-foreground: 215 25% 35%;
+
+    /* Card/Popover - Pure white for contrast */
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    /* Border: #CBD5E1 - Subtle border */
+    --border: 214 20% 81%;
+    --input: 214 20% 81%;
+    --ring: 217 91% 53%;
+
+    --radius: 0.75rem;
+
+    /* Destructive */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 217 91% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 33% 95%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 20% 81%;
+    --sidebar-ring: 217 91% 53%;
   }
 }
 
-@layer utilities {
-  .bg-gradient-radial-section {
-    background: radial-gradient(
-      50% 50% at 50% 50%,
-      #f6f1fc 0%,
-      transparent 100%
-    );
+@layer base {
+  * {
+    @apply border-border;
   }
 
-  .bg-gradient-to-br-hero {
-    background: linear-gradient(
-      303deg,
-      theme("colors.background.secondary") -197%,
-      theme("colors.primary.500") 100%
-    );
+  html {
+    scroll-behavior: smooth;
   }
 
-  .shadow-hero-button {
-    box-shadow:
-      rgba(16, 0, 69, 0.17) 0px 0.706592px 0.706592px -0.583333px,
-      rgba(16, 0, 69, 0.17) 0px 1.80656px 1.80656px -1.16667px,
-      rgba(16, 0, 69, 0.16) 0px 3.62176px 3.62176px -1.75px,
-      rgba(16, 0, 69, 0.15) 0px 6.8656px 6.8656px -2.33333px,
-      rgba(16, 0, 69, 0.13) 0px 13.6468px 13.6468px -2.91667px,
-      rgba(16, 0, 69, 0.08) 0px 30px 30px -3.5px,
-      rgb(186, 158, 255) 0px 1px 2px 0px inset;
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans), system-ui, sans-serif;
+    line-height: 1.7;
   }
 
-  .shadow-navbar {
-    box-shadow:
-      rgba(0, 0, 0, 0.04) 0px 0.796192px 0.796192px -1px,
-      rgba(0, 0, 0, 0.04) 0px 2.41451px 2.41451px -2px,
-      rgba(0, 0, 0, 0.03) 0px 6.38265px 6.38265px -3px,
-      rgba(0, 0, 0, 0.01) 0px 20px 20px -4px;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), system-ui, sans-serif;
+    line-height: 1.3;
   }
 
-  .shadow-navbar-button {
-    box-shadow:
-      rgba(45, 24, 93, 0.15) 0px 1px 4px 0px,
-      rgba(16, 0, 69, 0.17) 0px 0.706592px 0.706592px -0.583333px,
-      rgba(16, 0, 69, 0.17) 0px 1.80656px 1.80656px -1.16667px,
-      rgba(16, 0, 69, 0.16) 0px 3.62176px 3.62176px -1.75px,
-      rgba(16, 0, 69, 0.15) 0px 6.8656px 6.8656px -2.33333px,
-      rgba(16, 0, 69, 0.13) 0px 13.6468px 13.6468px -2.91667px,
-      rgba(16, 0, 69, 0.08) 0px 30px 30px -3.5px,
-      rgb(186, 158, 255) 0px 1px 2px 0px inset;
+  p {
+    line-height: 1.8;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-24 md:py-32 lg:py-40;
   }
 
-  .shadow-button-hover {
-    transition: box-shadow 0.3s ease;
+  .container-narrow {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .shadow-button-hover:hover {
-    box-shadow:
-      rgb(255, 255, 255) 0px 0px 3px 2px,
-      rgba(0, 0, 0, 0.35) 0px 6px 12px 3px,
-      rgba(0, 0, 0, 0.5) 0px 0px 0px 1px,
-      rgba(0, 0, 0, 0.25) 0px 2px 4px 0px;
+  .gradient-text {
+    @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  .card-hover {
+    @apply transition-all duration-300 hover:shadow-elevated hover:-translate-y-1;
+  }
+
+  .section-alt {
+    @apply bg-[hsl(var(--background-section))];
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, hsla(217, 91%, 53%, 0.06) 0%, hsla(188, 86%, 53%, 0.06) 100%);
+  }
+
+  .cta-gradient {
+    background: linear-gradient(135deg, hsl(217, 91%, 53%) 0%, hsl(188, 86%, 53%) 100%);
   }
 }
 

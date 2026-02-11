@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "about": "About",
+    "services": "Services",
+    "approach": "Approach",
+    "technologies": "Technologies",
+    "whyUs": "Why Us",
+    "getInTouch": "Get in Touch"
+  },
+  "hero": {
+    "badge": "Innovation & Excellence",
+    "title": "Transform Your Ideas into",
+    "titleHighlight": "Powerful Digital Solutions",
+    "subtitle": "We build custom web applications, mobile apps, and enterprise solutions with cutting-edge technologies.",
+    "cta": "Start Your Project",
+    "ctaSecondary": "Learn More",
+    "learnMore": "Learn More",
+    "stats": {
+      "projects": "Projects Completed",
+      "experience": "Years Experience",
+      "clients": "Happy Clients"
+    }
+  },
+  "about": {
+    "label": "Who We Are",
+    "title": "About IREESOFT",
+    "description": "We are a leading software development company in Tunisia, dedicated to delivering innovative solutions that drive business growth.",
+    "mission": {
+      "title": "Our Mission",
+      "description": "To empower businesses with cutting-edge technology solutions that transform their digital presence and drive sustainable growth."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "description": "To be the most trusted technology partner in Tunisia, recognized for innovation, quality, and exceptional client success."
+    },
+    "team": {
+      "title": "Expert Team",
+      "description": "Our talented team of developers, designers, and strategists work together to deliver outstanding results for every project."
+    }
+  },
+  "services": {
+    "label": "What We Offer",
+    "title": "Our Services",
+    "description": "Comprehensive software development solutions tailored to your needs",
+    "web": {
+      "title": "Web Development",
+      "description": "Custom web applications built with modern frameworks and best practices.",
+      "features": ["React", "Next.js", "TypeScript", "Responsive Design"]
+    },
+    "mobile": {
+      "title": "Mobile Apps",
+      "description": "Native and cross-platform mobile applications for iOS and Android.",
+      "features": ["React Native", "Flutter", "iOS", "Android"]
+    },
+    "custom": {
+      "title": "Custom Solutions",
+      "description": "Tailored software solutions designed to meet your specific business needs.",
+      "features": ["Enterprise", "Scalable", "Secure", "Custom"]
+    },
+    "maintenance": {
+      "title": "Maintenance & Support",
+      "description": "Ongoing support and maintenance to keep your applications running smoothly.",
+      "features": ["24/7 Support", "Updates", "Bug Fixes", "Monitoring"]
+    }
+  },
+  "approach": {
+    "label": "How We Work",
+    "title": "Our Approach",
+    "description": "A proven methodology for delivering exceptional results",
+    "steps": {
+      "analysis": {
+        "title": "Analysis",
+        "description": "We start by understanding your business needs and requirements in depth."
+      },
+      "design": {
+        "title": "Design",
+        "description": "Creating intuitive and beautiful user interfaces that enhance user experience."
+      },
+      "development": {
+        "title": "Development",
+        "description": "Building robust and scalable solutions using the latest technologies."
+      },
+      "delivery": {
+        "title": "Delivery",
+        "description": "Deploying and maintaining your solution with ongoing support."
+      }
+    }
+  },
+  "technologies": {
+    "label": "Our Tech Stack",
+    "title": "Technologies We Use",
+    "description": "Cutting-edge tools and frameworks for modern development",
+    "categories": {
+      "frontend": {
+        "title": "Frontend",
+        "description": "Modern frameworks for building responsive and interactive user interfaces"
+      },
+      "backend": {
+        "title": "Backend",
+        "description": "Robust server-side technologies and databases for scalable applications"
+      },
+      "mobile": {
+        "title": "Mobile",
+        "description": "Cross-platform and native mobile development solutions"
+      },
+      "cloud": {
+        "title": "Cloud & DevOps",
+        "description": "Cloud infrastructure and deployment automation tools"
+      }
+    }
+  },
+  "whyUs": {
+    "label": "Why IREESOFT",
+    "title": "Why Choose Us",
+    "description": "What sets us apart from the competition",
+    "list": [
+      "Expert team with years of experience",
+      "Cutting-edge technology stack",
+      "Agile development methodology",
+      "24/7 customer support",
+      "Competitive pricing"
+    ],
+    "reasons": {
+      "quality": {
+        "title": "Quality First",
+        "description": "We deliver high-quality code that meets industry standards and best practices."
+      },
+      "performance": {
+        "title": "High Performance",
+        "description": "Our solutions are optimized for speed, scalability, and reliability."
+      },
+      "support": {
+        "title": "Dedicated Support",
+        "description": "We provide ongoing support and maintenance to ensure your success."
+      },
+      "scalable": {
+        "title": "Scalable Solutions",
+        "description": "Our applications grow with your business, handling increased load seamlessly."
+      }
+    }
+  },
+  "cta": {
+    "badge": "Get in Touch",
+    "title": "Ready to Start Your Project?",
+    "description": "Let's discuss how we can help transform your ideas into reality",
+    "button": "Contact Us",
+    "responseTime": "We typically respond within 24 hours"
+  },
+  "footer": {
+    "aboutUs": "About Us",
+    "ourApproach": "Our Approach",
+    "whyChooseUs": "Why Choose Us",
+    "contact": "Contact",
+    "quickLinks": "Quick Links",
+    "explore": "Explore",
+    "description": "Leading software development company in Tunisia, delivering innovative digital solutions that drive business growth.",
+    "copyright": "© {{year}} IREESOFT. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service"
+  }
+}
+

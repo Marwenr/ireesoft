@@ -1,74 +1,42 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Sora } from "next/font/google";
+import { Toaster } from "@/components/ui/toaster";
+import { Toaster as Sonner } from "@/components/ui/sonner";
+import TooltipProvider from "@/components/providers/TooltipProvider";
+import QueryProvider from "@/components/providers/QueryProvider";
+import I18nProvider from "@/components/providers/I18nProvider";
 import "./globals.css";
-import Navbar from "@/components/ui/Navbar";
-import Footer from "@/components/ui/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const sora = Sora({
+  subsets: ["latin"],
+  variable: "--font-heading",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: {
-    default: "IREESOFT",
-    template: "%s | IREESOFT",
-  },
-  description:
-    "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
-  keywords: [
-    "développement logiciel",
-    "software development",
-    "IREESOFT",
-    "société de développement",
-    "développement web",
-    "solutions logicielles",
-  ],
+  title: "IREESOFT | Software Development Company in Tunisia",
+  description: "IREESOFT is a leading software development company in Tunisia. We build custom web applications, mobile apps, and enterprise solutions with cutting-edge technologies.",
+  keywords: "software development, web development, mobile apps, Tunisia, custom solutions, IREESOFT",
   authors: [{ name: "IREESOFT" }],
-  creator: "IREESOFT",
   openGraph: {
+    title: "IREESOFT | Software Development Company",
+    description: "Transform your ideas into powerful digital solutions. Expert software development services in Tunisia.",
     type: "website",
-    locale: "en_US",
-    url: "https://www.ireesoft.com/",
-    siteName: "IREESOFT",
-    title: "IREESOFT - Société de Développement Logiciel",
-    description:
-      "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
-    images: [
-      {
-        url: "/logo-navbar.svg",
-        width: 1200,
-        height: 630,
-        alt: "IREESOFT",
-      },
-    ],
+    images: ["https://lovable.dev/opengraph-image-p98pqg.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IREESOFT - Société de Développement Logiciel",
-    description:
-      "IREESOFT - Website vitrine de société de développement logiciel. Découvrez nos services de développement de logiciels et nos solutions technologiques innovantes.",
-    images: ["/logo-navbar.svg"],
-    creator: "@ireesoft",
+    site: "@ireesoft",
+    images: ["https://lovable.dev/opengraph-image-p98pqg.png"],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  icons: {
-    icon: "/logo-navbar.svg",
-    shortcut: "/logo-navbar.svg",
-    apple: "/logo-navbar.svg",
-  },
-  manifest: "/site.webmanifest",
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
+  alternates: {
+    canonical: "https://ireesoft.com",
   },
 };
 
@@ -78,12 +46,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        {children}
-        <Footer />
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.variable} ${sora.variable} font-sans antialiased`} suppressHydrationWarning>
+        <I18nProvider>
+          <QueryProvider>
+            <TooltipProvider>
+              {children}
+              <Toaster />
+              <Sonner />
+            </TooltipProvider>
+          </QueryProvider>
+        </I18nProvider>
       </body>
     </html>
   );
 }
+

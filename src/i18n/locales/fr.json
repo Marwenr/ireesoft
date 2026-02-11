@@ -1,0 +1,162 @@
+{
+  "nav": {
+    "about": "À propos",
+    "services": "Services",
+    "approach": "Approche",
+    "technologies": "Technologies",
+    "whyUs": "Pourquoi nous",
+    "getInTouch": "Contactez-nous"
+  },
+  "hero": {
+    "badge": "Innovation & Excellence",
+    "title": "Transformez vos idées en",
+    "titleHighlight": "Solutions Numériques Puissantes",
+    "subtitle": "Nous créons des applications web personnalisées, des applications mobiles et des solutions d'entreprise avec des technologies de pointe.",
+    "cta": "Démarrer votre projet",
+    "ctaSecondary": "En savoir plus",
+    "learnMore": "En savoir plus",
+    "stats": {
+      "projects": "Projets Réalisés",
+      "experience": "Années d'Expérience",
+      "clients": "Clients Satisfaits"
+    }
+  },
+  "about": {
+    "label": "Qui Nous Sommes",
+    "title": "À propos d'IREESOFT",
+    "description": "Nous sommes une entreprise de développement logiciel de premier plan en Tunisie, dédiée à la fourniture de solutions innovantes qui stimulent la croissance des entreprises.",
+    "mission": {
+      "title": "Notre Mission",
+      "description": "Donner aux entreprises les moyens d'utiliser des solutions technologiques de pointe qui transforment leur présence numérique et stimulent une croissance durable."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "description": "Être le partenaire technologique le plus fiable en Tunisie, reconnu pour l'innovation, la qualité et le succès exceptionnel des clients."
+    },
+    "team": {
+      "title": "Équipe d'Experts",
+      "description": "Notre équipe talentueuse de développeurs, designers et stratèges travaille ensemble pour offrir des résultats exceptionnels pour chaque projet."
+    }
+  },
+  "services": {
+    "label": "Ce que nous offrons",
+    "title": "Nos services",
+    "description": "Solutions de développement logiciel complètes adaptées à vos besoins",
+    "web": {
+      "title": "Développement Web",
+      "description": "Applications web personnalisées construites avec des frameworks modernes et les meilleures pratiques.",
+      "features": ["React", "Next.js", "TypeScript", "Design Responsive"]
+    },
+    "mobile": {
+      "title": "Applications Mobiles",
+      "description": "Applications mobiles natives et multiplateformes pour iOS et Android.",
+      "features": ["React Native", "Flutter", "iOS", "Android"]
+    },
+    "custom": {
+      "title": "Solutions Personnalisées",
+      "description": "Solutions logicielles sur mesure conçues pour répondre à vos besoins spécifiques.",
+      "features": ["Entreprise", "Évolutif", "Sécurisé", "Personnalisé"]
+    },
+    "maintenance": {
+      "title": "Maintenance & Support",
+      "description": "Support et maintenance continus pour maintenir vos applications en bon état de fonctionnement.",
+      "features": ["Support 24/7", "Mises à jour", "Corrections de bugs", "Surveillance"]
+    }
+  },
+  "approach": {
+    "label": "Comment Nous Travaillons",
+    "title": "Notre approche",
+    "description": "Une méthodologie éprouvée pour fournir des résultats exceptionnels",
+    "steps": {
+      "analysis": {
+        "title": "Analyse",
+        "description": "Nous commençons par comprendre en profondeur vos besoins et exigences commerciales."
+      },
+      "design": {
+        "title": "Conception",
+        "description": "Création d'interfaces utilisateur intuitives et belles qui améliorent l'expérience utilisateur."
+      },
+      "development": {
+        "title": "Développement",
+        "description": "Construction de solutions robustes et évolutives utilisant les dernières technologies."
+      },
+      "delivery": {
+        "title": "Livraison",
+        "description": "Déploiement et maintenance de votre solution avec un support continu."
+      }
+    }
+  },
+  "technologies": {
+    "label": "Notre Stack Technologique",
+    "title": "Technologies que nous utilisons",
+    "description": "Outils et frameworks de pointe pour le développement moderne",
+    "categories": {
+      "frontend": {
+        "title": "Frontend",
+        "description": "Frameworks modernes pour créer des interfaces utilisateur réactives et interactives"
+      },
+      "backend": {
+        "title": "Backend",
+        "description": "Technologies côté serveur robustes et bases de données pour des applications évolutives"
+      },
+      "mobile": {
+        "title": "Mobile",
+        "description": "Solutions de développement mobile multiplateformes et natives"
+      },
+      "cloud": {
+        "title": "Cloud & DevOps",
+        "description": "Infrastructure cloud et outils d'automatisation de déploiement"
+      }
+    }
+  },
+  "whyUs": {
+    "label": "Pourquoi IREESOFT",
+    "title": "Pourquoi nous choisir",
+    "description": "Ce qui nous distingue de la concurrence",
+    "list": [
+      "Équipe experte avec des années d'expérience",
+      "Stack technologique de pointe",
+      "Méthodologie de développement agile",
+      "Support client 24/7",
+      "Tarifs compétitifs"
+    ],
+    "reasons": {
+      "quality": {
+        "title": "Qualité d'abord",
+        "description": "Nous livrons un code de haute qualité qui répond aux normes de l'industrie et aux meilleures pratiques."
+      },
+      "performance": {
+        "title": "Haute performance",
+        "description": "Nos solutions sont optimisées pour la vitesse, l'évolutivité et la fiabilité."
+      },
+      "support": {
+        "title": "Support dédié",
+        "description": "Nous fournissons un support et une maintenance continus pour assurer votre succès."
+      },
+      "scalable": {
+        "title": "Solutions évolutives",
+        "description": "Nos applications grandissent avec votre entreprise, gérant l'augmentation de charge sans problème."
+      }
+    }
+  },
+  "cta": {
+    "badge": "Contactez-nous",
+    "title": "Prêt à démarrer votre projet ?",
+    "description": "Discutons de la façon dont nous pouvons vous aider à transformer vos idées en réalité",
+    "button": "Contactez-nous",
+    "responseTime": "Nous répondons généralement dans les 24 heures"
+  },
+  "footer": {
+    "aboutUs": "À propos de nous",
+    "ourApproach": "Notre approche",
+    "whyChooseUs": "Pourquoi nous choisir",
+    "contact": "Contact",
+    "quickLinks": "Liens rapides",
+    "explore": "Explorer",
+    "description": "Entreprise de développement logiciel de premier plan en Tunisie, fournissant des solutions numériques innovantes qui stimulent la croissance des entreprises.",
+    "copyright": "© {{year}} IREESOFT. Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation"
+  }
+}
+
