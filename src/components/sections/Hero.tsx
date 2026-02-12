@@ -4,16 +4,17 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
+import heroImage from "@/assets/hero-image.jpg";
 
 const Hero = () => {
   const { t } = useTranslation();
 
   return (
     <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      <div className="absolute inset-0 -z-10 hero-gradient" />
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-1/4 right-1/4 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[100px]" />
-        <div className="absolute bottom-1/4 left-1/4 w-[500px] h-[500px] bg-accent/5 rounded-full blur-[100px]" />
+        <img src={heroImage.src} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0 bg-background/85" />
+        <div className="absolute inset-0 hero-gradient" />
       </div>
 
       <div className="container-narrow">

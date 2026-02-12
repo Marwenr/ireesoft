@@ -18,7 +18,7 @@ const Approach = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="approach" className="section-padding bg-background-section" ref={ref}>
+    <section id="approach" className="relative section-padding bg-background-section" ref={ref}>
       <div className="container-narrow">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.span initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-primary font-medium text-sm uppercase tracking-wider" suppressHydrationWarning>

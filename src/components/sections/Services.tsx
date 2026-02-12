@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { Globe, Smartphone, Layers, Wrench, ArrowUpRight } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import aboutImage from "@/assets/about-team.jpg";
 
 const serviceKeys = [
   { icon: Globe, key: "web" },
@@ -18,7 +19,12 @@ const Services = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="services" className="section-padding" ref={ref}>
+    <section id="services" className="relative section-padding" ref={ref}>
+      <div className="absolute inset-0 -z-10">
+        <img src={aboutImage.src} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0 bg-background/85" />
+        <div className="absolute inset-0 hero-gradient" />
+      </div>
       <div className="container-narrow">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.span initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-primary font-medium text-sm uppercase tracking-wider" suppressHydrationWarning>

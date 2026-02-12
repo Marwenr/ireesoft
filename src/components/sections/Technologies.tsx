@@ -3,6 +3,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
+import techImage from "@/assets/tech-bg.jpg";
 
 const techCategories = [
   { key: "frontend", technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Vue.js"] },
@@ -17,7 +18,12 @@ const Technologies = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="technologies" className="section-padding bg-background-section" ref={ref}>
+    <section id="technologies" className="section-padding relative" ref={ref}>
+      <div className="absolute inset-0 -z-10">
+        <img src={techImage.src} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        <div className="absolute inset-0 bg-background/85" />
+        <div className="absolute inset-0 hero-gradient" />
+      </div>
       <div className="container-narrow">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.span initial={{ opacity: 0, y: 20 }} animate={isInView ? { opacity: 1, y: 0 } : {}} transition={{ duration: 0.5 }} className="text-primary font-medium text-sm uppercase tracking-wider" suppressHydrationWarning>
